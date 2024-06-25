@@ -2,10 +2,10 @@
 ====================================
 
 
-.. _环境搭建:
+.. _搭建基础环境:
 .. toctree::
    :maxdepth: 2
-   :caption: 快速构建
+   :caption: 构建DCU基础环境
 
    get_started.md
 
