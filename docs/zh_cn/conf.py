@@ -16,7 +16,7 @@
 import os
 import sys
 
-import pytorch_sphinx_theme
+# import pytorch_sphinx_theme
 from m2r import MdInclude
 from recommonmark.transform import AutoStructify
 from sphinx.builders.html import StandaloneHTMLBuilder
@@ -106,25 +106,25 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
 
-# -- Options for HTML output
+# ----------------------- Options for HTML output -----------------------
 
 # html_theme = 'sphinx_rtd_theme'
 # html_theme = 'sphinx_rtd_theme'
-html_theme = 'pytorch_sphinx_theme'
-html_theme_path = [pytorch_sphinx_theme.get_html_theme_path()]
+# html_theme = 'pytorch_sphinx_theme'
+# html_theme_path = [pytorch_sphinx_theme.get_html_theme_path()]
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-html_theme_options = {
-    'logo_url': 'https://dcu.readthedocs.io/zh-cn/latest/',
-    'menu': [{
-        'name': 'GitHub',
-        'url': 'https://github.com/lacacy/DCU'
-    }],
-    'menu_lang': 'cn',
-}
+# html_theme_options = {
+#     'logo_url': 'https://dcu.readthedocs.io/zh-cn/latest/',
+#     'menu': [{
+#         'name': 'GitHub',
+#         'url': 'https://github.com/lacacy/DCU'
+#     }],
+#     'menu_lang': 'cn',
+# }
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -149,10 +149,10 @@ html_theme_options = {
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'dcudoc'
+htmlhelp_basename = 'DCU Doc'
 
 
-
+# --------------------------------------------------------------------------------------------
 
 # -- Options for LaTeX output ------------------------------------------------
 
@@ -202,6 +202,8 @@ texinfo_documents = [
 
 # Bibliographic Dublin Core info.
 epub_title = project
+# -- Options for EPUB output
+epub_show_urls = 'footnote'
 
 # The unique identifier of the text. This can be a ISBN number
 # or the project homepage.
@@ -215,10 +217,13 @@ epub_title = project
 # A list of files that should not be packed into the epub file.
 epub_exclude_files = ['search.html']
 
+# --------------------------------------------------------------
+
+
 # set priority when building html
-StandaloneHTMLBuilder.supported_image_types = [
-    'image/svg+xml', 'image/gif', 'image/png', 'image/jpeg'
-]
+# StandaloneHTMLBuilder.supported_image_types = [
+#     'image/svg+xml', 'image/gif', 'image/png', 'image/jpeg'
+# ]
 
 # -- Extension configuration -------------------------------------------------
 # Ignore >>> when copying code
@@ -226,14 +231,14 @@ copybutton_prompt_text = r'>>> |\.\.\. '
 copybutton_prompt_is_regexp = True
 
 
-def setup(app):
-    app.add_config_value('no_underscore_emphasis', False, 'env')
-    app.add_config_value('m2r_parse_relative_links', False, 'env')
-    app.add_config_value('m2r_anonymous_references', False, 'env')
-    app.add_config_value('m2r_disable_inline_math', False, 'env')
-    app.add_directive('mdinclude', MdInclude)
-    app.add_config_value('recommonmark_config', {
-        'auto_toc_tree_section': 'Contents',
-        'enable_eval_rst': True,
-    }, True)
-    app.add_transform(AutoStructify)
+# def setup(app):
+#     app.add_config_value('no_underscore_emphasis', False, 'env')
+#     app.add_config_value('m2r_parse_relative_links', False, 'env')
+#     app.add_config_value('m2r_anonymous_references', False, 'env')
+#     app.add_config_value('m2r_disable_inline_math', False, 'env')
+#     app.add_directive('mdinclude', MdInclude)
+#     app.add_config_value('recommonmark_config', {
+#         'auto_toc_tree_section': 'Contents',
+#         'enable_eval_rst': True,
+#     }, True)
+#     app.add_transform(AutoStructify)
