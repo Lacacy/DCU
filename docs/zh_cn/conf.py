@@ -16,7 +16,7 @@
 import os
 import sys
 
-# import pytorch_sphinx_theme
+import pytorch_sphinx_theme
 from m2r import MdInclude
 from recommonmark.transform import AutoStructify
 from sphinx.builders.html import StandaloneHTMLBuilder
@@ -140,22 +140,22 @@ pygments_style = 'sphinx'
 # ----------------------- Options for HTML output -----------------------
 
 # html_theme = 'sphinx_rtd_theme'
-html_theme = 'sphinx_rtd_theme'
-# html_theme = 'pytorch_sphinx_theme'
-# html_theme_path = [pytorch_sphinx_theme.get_html_theme_path()]
+# html_theme = 'sphinx_rtd_theme'
+html_theme = 'pytorch_sphinx_theme'
+html_theme_path = [pytorch_sphinx_theme.get_html_theme_path()]
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-# html_theme_options = {
-#     'logo_url': 'https://dcu.readthedocs.io/zh-cn/latest/',
-#     'menu': [{
-#         'name': 'GitHub',
-#         'url': 'https://github.com/lacacy/DCU'
-#     }],
-#     'menu_lang': 'cn',
-# }
+html_theme_options = {
+    'logo_url': 'https://dcu.readthedocs.io/zh-cn/latest/',
+    'menu': [{
+        'name': 'GitHub',
+        'url': 'https://github.com/lacacy/DCU'
+    }],
+    'menu_lang': 'cn',
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

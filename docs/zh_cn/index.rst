@@ -16,6 +16,20 @@
 
    docker.md
 
+.. _兼容性:
+.. toctree::
+   :maxdepth: 2
+   :caption: _兼容性
+
+   compatibility.md
+
+.. _从NV的GPU迁移到DCU:
+.. toctree::
+   :maxdepth: 2
+   :caption: _从NV的GPU迁移到DCU
+
+   NV_GPU_TO_DCU.md.md
+
 索引与表格
 ==================
 

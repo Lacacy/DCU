@@ -1,6 +1,6 @@
 # 构建DCU基础环境
 
-## DCU 环境安装手册
+## DCU环境安装手册
 
 开发者社区的环境搭建文档:
 [https://cancon.hpccube.com:65024/1/main/DTK-24.04/Document](https://cancon.hpccube.com:65024/1/main/DTK-24.04/Document)
@@ -11,7 +11,8 @@
 ## 安装驱动
 
 **注意**
-> 注意DTK和rock驱动有对应关系，可参考[dcu-环境安装手册](#dcu-环境安装手册)提出，一般都安装最新的就行；
+
+> 注意DTK和rock驱动有对应关系，可参考[dcu-环境安装手册](#DCU环境安装手册)，推荐安装最新的使用
 
 下载链接: [https://cancon.hpccube.com:65024/6/main](https://cancon.hpccube.com:65024/6/main)
 
@@ -59,9 +60,8 @@ ln -s /opt/dtk-24.04.1 /opt/dtk
 ```
 
 3. 设置 DTK 环境变量
-> DTK 压缩文件中提供了设置环境变量脚本 env.sh。可以通过 source
-/opt/dtk/env.sh 的方式临时加载环境变量。为避免多次配置，常用以下方式加载环
-境变量
+
+> DTK 压缩文件中提供了设置环境变量脚本 env.sh。可以通过 source /opt/dtk/env.sh 的方式临时加载环境变量。为避免多次配置，常用以下方式加载环境变量
 
 ```bash
 echo "source /opt/dtk/env.sh">> ~/.bashrc
@@ -85,12 +85,3 @@ DCU Temp AvgPwr Fan Perf PwrCap VRAM% DCU%
 ======================End of SMI Log========================
 ```
 
-## DTK和DAS(AI生态包)兼容性
-
-**注意:**
->  不兼容的版本可能出现严重的环境问题
-
-| DTK版本 | DAS版本 |
-| ------- | ------- |
-|DTK-24.04.1 | DAS1.1 |
-|DTK-24.04   | DAS1.0  |
