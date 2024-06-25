@@ -121,7 +121,7 @@ html_theme_options = {
     'logo_url': 'https://dcu.readthedocs.io/zh-cn/latest/',
     'menu': [{
         'name': 'GitHub',
-        'url': 'https://github.com/InternLM/lmdeploy'
+        'url': 'https://github.com/lacacy/DCU'
     }],
     'menu_lang': 'cn',
 }
