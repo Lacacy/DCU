@@ -52,7 +52,6 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
     'sphinx.ext.intersphinx',
-    'sphinxcontrib.todomodule',
     
     'sphinx.ext.napoleon',
     'sphinx.ext.viewcode',
