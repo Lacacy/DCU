@@ -10,6 +10,7 @@
 |DTK-24.04.1 | DAS1.1 |
 |DTK-24.04   | DAS1.0  |
 
-## 待: DCU 对AI生态的兼容性
+## TODO:
 
-## 待：DCU 对CUDA的兼容性
+- DCU 对 AI 生态的兼容性
+- DCU 对 CUDA 的兼容性
