@@ -9,7 +9,8 @@ docutils==0.16.0
 m2r==0.2.1
 markdown>=3.4.0
 mistune==0.8.4
-# myst-parser
+myst-parser
+-e git+https://github.com/InternLM/pytorch_sphinx_theme.git#egg=pytorch_sphinx_theme
 
 # readthedocs.txt
 
