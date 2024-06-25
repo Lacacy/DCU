@@ -21,14 +21,21 @@ from m2r import MdInclude
 from recommonmark.transform import AutoStructify
 from sphinx.builders.html import StandaloneHTMLBuilder
 
+sys.path.insert(0, os.path.abspath('../..'))
+
+version_file = '../../version.py'
+with open(version_file, 'r') as f:
+    exec(compile(f.read(), version_file, 'exec'))
+__version__ = locals()['__version__']
+
 project = 'DCU'
 copyright = '2024-now, DCU User'
 author = 'DCU User'
 
 # The short X.Y version
-release = '0.1'
+version = __version__
 # The full version, including alpha/beta/rc tags
-version = '0.1.0'
+release = __version__
 
 # -- General configuration
 # If your documentation needs a minimal Sphinx version, state it here.
