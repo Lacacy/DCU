@@ -41,6 +41,7 @@ docker run -it \
 --name=dcu_test \
 image.sourcefind.cn:5000/dcu/admin/base/custom:alphafold2-2.3.2-dtk23.10-py38 \
 /bin/bash
+```           
 
 注： （1）若出现libhsa-runtime相关报错，启动参数请加上-v /opt/hyhal:/opt/hyhal*；若物理机无/opt/hyhal，请下载hyhal并解压放置容器/opt/下；*
      （2）参数解释：
@@ -56,6 +57,5 @@ image.sourcefind.cn:5000/dcu/admin/base/custom:alphafold2-2.3.2-dtk23.10-py38 \
                 --cap-add=SYS_PTRACE  # 添加权限（SYS_PTRACE|NET_ADMIN...）
                 --security-opt seccomp=unconfined  # 安全配置（seccomp=unconfined|label=disable...）
                 image.sourcefind.cn:5000/dcu/admin/base/custom:alphafold2-2.3.2-dtk23.10-py38  # 所需镜像
+                --name=dcu_test   # 容器名称
                 /bin/bash  # 容器内启动bash
-```           
-
