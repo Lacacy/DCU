@@ -10,7 +10,7 @@
 对于依赖cuda的深度学习算法包，需要替换为光合开发者社区的版本;
 
 开发者社区：[https://developer.hpccube.com/tool](https://developer.hpccube.com/tool)
-![AI生态包下载地址](https://github.com/Lacacy/DCU/blob/master/docs/zh_cn/imgs/das.png?raw=True)
+![AI生态包下载地址](./imgs/das.png)
 
 
 **手动下载其中对应算法包的whl文件到您的服务器，安装轮子**：
