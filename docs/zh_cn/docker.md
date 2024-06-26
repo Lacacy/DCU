@@ -41,21 +41,25 @@ docker run -it \
 --name=dcu_test \
 image.sourcefind.cn:5000/dcu/admin/base/custom:alphafold2-2.3.2-dtk23.10-py38 \
 /bin/bash
+
+
+注： 
+（1）若出现libhsa-runtime相关报错，启动参数请加上-v /opt/hyhal:/opt/hyhal*；若物理机无/opt/hyhal，请下载hyhal并解压放置容器/opt/下；*
+（2）参数解释：
+     -it  # i:打开容器标准输入，t:分配一个伪终端
+     --network=host  # 连接网络（none|host|自定义网络...）
+     --ipc=host  # 设置IPC模式（none|shareable|host...）
+     --shm-size=24G  # 设置/dev/shm大小
+     --device=/dev/kfd  # 指定访问设备（DCU需要添加/dev/kfd、/dev/mkfd、/dev/dri）
+     --device=/dev/mkfd
+     --device=/dev/dri
+     -v /opt/hyhal:/opt/hyhal  # dtk23.10以上版本镜像需要-v挂载物理机目录/opt/hyhal
+     --group-add video  # 设置用户附加组（普通用户使用DCU需要）
+     --cap-add=SYS_PTRACE  # 添加权限（SYS_PTRACE|NET_ADMIN...）
+     --security-opt seccomp=unconfined  # 安全配置（seccomp=unconfined|label=disable...）
+     --name=dcu_test   # 容器名称
+     image.sourcefind.cn:5000/dcu/admin/base/custom:alphafold2-2.3.2-dtk23.10-py38  # 所需镜像
+     /bin/bash  # 容器内启动bash
 ```           
 
-注： （1）若出现libhsa-runtime相关报错，启动参数请加上-v /opt/hyhal:/opt/hyhal*；若物理机无/opt/hyhal，请下载hyhal并解压放置容器/opt/下；*
-     （2）参数解释：
-                -it  # i:打开容器标准输入，t:分配一个伪终端
-                --network=host  # 连接网络（none|host|自定义网络...）
-                --ipc=host  # 设置IPC模式（none|shareable|host...）
-                --shm-size=16G  # 设置/dev/shm大小
-                --device=/dev/kfd  # 指定访问设备（DCU需要添加/dev/kfd、/dev/mkfd、/dev/dri）
-                --device=/dev/mkfd
-                --device=/dev/dri
-                -v /opt/hyhal:/opt/hyhal  # dtk23.10以上版本镜像需要-v挂载物理机目录/opt/hyhal
-                --group-add video  # 设置用户附加组（普通用户使用DCU需要）
-                --cap-add=SYS_PTRACE  # 添加权限（SYS_PTRACE|NET_ADMIN...）
-                --security-opt seccomp=unconfined  # 安全配置（seccomp=unconfined|label=disable...）
-                image.sourcefind.cn:5000/dcu/admin/base/custom:alphafold2-2.3.2-dtk23.10-py38  # 所需镜像
-                --name=dcu_test   # 容器名称
-                /bin/bash  # 容器内启动bash
+

@@ -6,8 +6,8 @@
 [https://cancon.hpccube.com:65024/1/main/DTK-24.04/Document](https://cancon.hpccube.com:65024/1/main/DTK-24.04/Document)
 
 建议参考如下文档进行安装DCU基础环境：
-<!-- ![DCU 环境安装手册](./imgs/env_install.png) -->
-<center><img src="./imgs/env_install.png" alt="DCU 环境安装手册" style="zoom:50%;" /></center>
+![DCU 环境安装手册](./imgs/env_install.png)
+<!-- <center><img src="./imgs/env_install.png" alt="DCU 环境安装手册" style="zoom:50%;" /></center> -->
 
 ## 安装驱动
 
