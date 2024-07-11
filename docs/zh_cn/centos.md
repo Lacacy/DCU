@@ -1,6 +1,6 @@
-### 1.5.1. Centos-7.6:
+### 1.2 DCU基础环境完整教程-Centos7.6:
 
-#### 1.5.1.1. **非root用户安装注意事项:**
+#### 1.2.1 **非root用户安装注意事项:**
    - 确保非root用户已加入`video`组，以便能够使用DCU。
      ```shell
      # 对于有sudo权限的非root用户
@@ -10,7 +10,7 @@
      usermod -aG video <userid>
      ```
 
-#### 1.5.1.2. **操作系统设置**：
+#### 1.2.2. **操作系统设置**：
 
 确保启动项中不包含nomodeset选项，如果内核以nomodeset选项启动，则驱动可能无法成功加载。
 
@@ -26,14 +26,14 @@
     ```
 
 
-#### 1.5.1.3. **关闭内核自动更新:**
+#### 1.2.3. **关闭内核自动更新:**
    - 编辑`/etc/yum.conf`，在`[main]`部分添加：
      ```
      exclude=kernel* 
      exclude=centos-release*
      ```
 
-#### 1.5.1.4. **更新yum源:**
+#### 1.2.4. **更新yum源:**
 
    - 替换为中科大源，针对CentOS 7.6的示例, （注意使用双引号）：
 
@@ -116,7 +116,7 @@
         yum makecache 	
         ```
 
-#### 1.5.1.5. **安装相关依赖:**
+#### 1.2.5. **安装相关依赖:**
    - 联网执行以下命令安装必要的依赖包：
 
         ```shell
@@ -168,7 +168,7 @@
             yum --disablerepo="*" --enablerepo="local-repo" install cmake3
             ```
 
-#### 1.5.1.6. **校验系统配置:**
+#### 1.2.6. **校验系统配置:**
 
 | 设备名称 | 设备码 |
 | -----   | ----- |
@@ -214,7 +214,7 @@ root@sugontest79:/mnt#lspci -nn |grep -i 6210
 
 
 
-#### 1.5.1.7. **安装驱动:**
+#### 1.2.7. **安装驱动:**
 
 **注意：**
 > DTK和rock驱动有对应关系，可参考[dcu-环境安装手册](#DCU环境安装手册)，推荐安装最新的使用<br>
@@ -267,7 +267,7 @@ root@sugontest79:/mnt#lspci -nn |grep -i 6210
 
 
 
-#### 1.5.1.8. **安装DTK:**
+#### 1.2.8. **安装DTK:**
    
 **DTK下载地址**:  [https://cancon.hpccube.com:65024/1/main](https://cancon.hpccube.com:65024/1/main)  → latest → 对应的操作系统 → DTK-version-OS-version-x86_64.tar.gz
 
@@ -308,7 +308,7 @@ root@sugontest79:/mnt#lspci -nn |grep -i 6210
     ======================End of SMI Log========================
     ```
 
-#### 1.5.1.9. **验证安装结果:**
+#### 1.2.9. **验证安装结果:**
 
 1. 使用`rocminfo`命令检查ROCm系统状态
 

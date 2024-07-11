@@ -1,13 +1,13 @@
-# 1. 构建DCU基础环境
+# 1.1 构建DCU基础环境
 
 
-## 1.1. 操作系统版本兼容列表
+## 1.1.1. 操作系统版本兼容列表
 
 
 **注意**:
 
 > 使用`iso`镜像安装操作系统时，请勿允许任何操作系统的更新行为, 否则会带来内核版本的升级，导致安装失败; <br>
-> 可参考 `1.4` 下的常用操作系统安装步骤之中的锁核操作; 
+> 可参考 `1.2.3\1.3.3\1.4.3` 下的常用操作系统安装步骤之中的锁核操作; 
 
 **操作系统**:
 
@@ -33,7 +33,7 @@
 
 ---
 
-## 1.2. 支持的DCU型号
+## 1.1.2. 支持的DCU型号
 
 - Z100
 - Z100L
@@ -41,7 +41,7 @@
 - K100_AI
 
 
-## 1.3. 开发者社区 DCU 环境安装手册
+## 1.1.3. 开发者社区 DCU 环境安装手册
 
 该文档主要针对 DCU 加速卡，提供基础软件环境安装部署以及基础测试的参考指导。
 
@@ -55,11 +55,8 @@
 ![DCU 环境安装手册](./imgs/env_install.png)
 <!-- <center><img src="./imgs/env_install.png" alt="DCU 环境安装手册" style="zoom:50%;" /></center> -->
 
-## 1.4. 驱动和DTK的下载安装地址:
+## 1.1.4. 驱动和DTK的下载安装地址:
 
 **驱动下载地址**:  [https://cancon.hpccube.com:65024/6/main](https://cancon.hpccube.com:65024/6/main) → latest 驱动→ rock-xxx-xxx.aio.run
 
 **DTK下载地址**:  [https://cancon.hpccube.com:65024/1/main](https://cancon.hpccube.com:65024/1/main)  → latest → 对应的操作系统 → DTK-version-OS-version-x86_64.tar.gz
-
-## 1.5 常用操作系统安装DCU环境示例:
-
