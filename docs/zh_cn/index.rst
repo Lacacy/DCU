@@ -5,28 +5,29 @@
 .. _搭建基础环境:
 .. toctree::
    :maxdepth: 2
-   :caption: 构建DCU基础环境
+   :caption: 1. 构建DCU基础环境
 
    get_started.md
+   centos.md
 
 .. _基于Docker使用DCU:
 .. toctree::
    :maxdepth: 2
-   :caption: Docker
+   :caption: 2. Docker
 
    docker.md
 
 .. _兼容性:
 .. toctree::
    :maxdepth: 2
-   :caption: 兼容性
+   :caption: 3. 兼容性
 
    compatibility.md
 
 .. _从NV的GPU迁移到DCU:
 .. toctree::
    :maxdepth: 2
-   :caption: 从NV的GPU迁移到DCU
+   :caption: 4. 从NV的GPU迁移到DCU
 
    NV_GPU_TO_DCU.md
 

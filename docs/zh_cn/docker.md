@@ -1,4 +1,4 @@
-# 基于Docker使用DCU
+# 2. 基于Docker使用DCU
 
 DCU开发者社区光源镜像介绍:
 
@@ -6,7 +6,7 @@ DCU开发者社区光源镜像介绍:
 
 光源可以查询到基于多种DTK版本的安装的深度学习基础镜像、大模型推理框架(vllm、lmdeploy、fastllm等)镜像、通用模型推理框架镜像(migraphx、AITemplate等)镜像；
 
-## 安装Docker
+## 2.1. 安装Docker
 
 参考当前操作系统的版本号，自行安装docker
 
@@ -15,7 +15,7 @@ DCU开发者社区光源镜像介绍:
 cat /etc/os-release
 ```
 
-## 启动容器
+## 2.2. 启动容器
 
 基于镜像创建的容器可提供开箱即用的基于DCU的深度学习运行环境：
 
