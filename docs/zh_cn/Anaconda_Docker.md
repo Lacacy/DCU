@@ -12,7 +12,7 @@
 ```bash
 conda create -n dcu_test python=3.10
 conda activate dcu_test
-pip3 config unset global.index-url
+pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
 ### 2.1.1.3. 从开发者社区的下载torch、torchvision;
@@ -107,7 +107,7 @@ image.sourcefind.cn:5000/dcu/admin/base/pytorch:2.1.0-ubuntu20.04-dtk24.04.1-py3
      /bin/bash  # 容器内启动bash
 ```           
 
-### 2.2.6. 验证`torch`是否安装成功;
+## 2.2.6. 验证`torch`是否安装成功;
 
     ```shell
     python -c "import torch;print(torch.cuda.is_available());print(torch.cuda.device_count())"
@@ -118,7 +118,7 @@ image.sourcefind.cn:5000/dcu/admin/base/pytorch:2.1.0-ubuntu20.04-dtk24.04.1-py3
 1. 下载torch、torchvision的whl文件到本地; 
 2. `pip install *.whl`;
 
-### 2.2.7. 执行resetnet50分类的推理代码:
+## 2.2.7. 执行resetnet50分类的推理代码:
 
 ```shell
 git clone http://developer.hpccube.com/codes/wangkx1/torch_inference_resnet50.git
