@@ -7,7 +7,7 @@
 
     安装系统时将网络disable；
   
-   ![disable_net](./imgs/ubuntu/disable_net.png)
+   ![disable_net](../imgs/ubuntu/disable_net.png)
 
    2. 安装过程中, 涉及到更新的选项都选择不更新;
 
@@ -36,7 +36,7 @@
 
        - 或者，或者修改/etc/group文件，添加test用户;
 
-            ![disable_net](./imgs/ubuntu/render.png)
+            ![disable_net](../imgs/ubuntu/render.png)
             
             退出重新登录。
 

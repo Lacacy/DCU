@@ -8,23 +8,23 @@
    :caption: 1. 构建DCU基础环境
 
    get_started.md
-   centos.md
-   ubuntu.md
+   ./install_dcu_on_os/centos.md
+   ./install_dcu_on_os/ubuntu.md
    
 
-.. _基于Docker使用DCU:
+.. _基于不同场景使用DCU:
 .. toctree::
    :maxdepth: 2
-   :caption: 2. Docker
+   :caption: 2. 快速使用DCU
 
-   docker.md
+   Anaconda_Docker.md
 
 .. _基于Anaconda使用DCU:
 .. toctree::
    :maxdepth: 2
-   :caption: 3. Anaconda
+   :caption: 3. hy-smi 使用介绍
 
-   Anaconda.md
+   Hy-SMI.md
 
 .. _从NV的GPU迁移到DCU:
 .. toctree::
