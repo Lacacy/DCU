@@ -7,9 +7,11 @@
 **注意**:
 
 > 使用`iso`镜像安装操作系统时，请勿允许任何操作系统的更新行为, 否则会带来内核版本的升级，导致安装失败; <br>
-> 可参考 `1.2.3\1.3.3\1.4.3` 下的常用操作系统安装步骤之中的锁核操作; 
+> 可参考 `1.2.3\1.3.2\1.4.3` 下的常用操作系统安装步骤之中的锁核操作; 
 
 **操作系统**:
+
+开发者社区推荐操作系统:
 
 | 操作系统 | 版本 | 内核 | 
 | ------- | ---  | ---- |
@@ -30,6 +32,8 @@
 | BCLinux   | 8.2       | 4.19.0-240.23.11.el8_2.bclinux.x86_64 |
 
 
+[操作系统兼容性列表包含(兼容性等级等)](https://docs.qq.com/sheet/DVHdTZHB3RVZOVENI?tab=dklqmf)
+
 
 ---
 
@@ -40,23 +44,67 @@
 - K100 
 - K100_AI
 
+## 1.1.3. DCU软件介绍:
 
-## 1.1.3. 开发者社区 DCU 环境安装手册
+- **DTK**: 
+    > DCU加速卡软件工具包：包括函数库、编译环境、管理工具、性能分析工具等。
+
+- **DAS (DCU AI Software Stack)**: 
+    > 目前主要以python的whl形式在光合开发者社区进行发布。
+    - 算子层
+    - 框架层
+    - 扩展组件层
+
+
+## 1.1.4. **兼容性(必读)**
+
+### 1.1.4.1. 加速卡与DTK的兼容性
+
+| DCU猩红 | DTK版本 | 注意 |
+| -------  | ------- | ------- |
+| Z100     | DTK >=21.04 | 推荐使用 DTK >= 23.10 |
+| Z100L    | DTK >=21.04 | 推荐使用 DTK >= 23.10 |
+| K100     | DTK >=23.10 | |
+| K100-AI  | DTK >=24.04 | |
+
+### 1.1.4.2. DTK和DAS(AI生态包)兼容性
+
+| DTK版本 | DAS版本 | 注意 |
+| ------- | ------- | ------- |
+|DTK-24.04.1 | DAS1.1 |  见下述 DAS1.1 使用注意 |
+|DTK-24.04   | DAS1.0  | |
+
+**注意:**
+>  不兼容的版本可能出现严重的环境问题
+
+---
+- DAS1.1 使用注意:
+    - 不支持操作系统`ubuntu18.04`, `Centos7.6` 等 `glibc <= 2.31`的操作系统
+    - glib 版本查看方式: `ldd --version`
+    - 如果遇到问题, 建议通过 docker 使用 glibc 高版本的容器系统;
+
+---
+
+
+## 1.1.5. 开发者社区 DCU 环境安装手册
 
 该文档主要针对 DCU 加速卡，提供基础软件环境安装部署以及基础测试的参考指导。
 
-具体信息开发者社区的环境搭建文档:
-[https://cancon.hpccube.com:65024/1/main/latest/Document](https://cancon.hpccube.com:65024/1/main/latest/Document)
-
 建议参考如下文档进行安装DCU基础环境:
 
-`https://developer.hpccube.com/tool/` → DCU Toolkit → latest → Document → DTK 开发环境安装部署手册.pdf
+[**点击，进入开发者社区环境搭建文档**](https://cancon.hpccube.com:65024/1/main/latest/Document) → DTK 开发环境安装部署手册.pdf
 
-![DCU 环境安装手册](./imgs/env_install.png)
-<!-- <center><img src="./imgs/env_install.png" alt="DCU 环境安装手册" style="zoom:50%;" /></center> -->
 
-## 1.1.4. 驱动和DTK的下载安装地址:
 
-**驱动下载地址**:  [https://cancon.hpccube.com:65024/6/main](https://cancon.hpccube.com:65024/6/main) → latest 驱动→ rock-xxx-xxx.aio.run
+## 1.1.6. 下载地址:
 
-**DTK下载地址**:  [https://cancon.hpccube.com:65024/1/main](https://cancon.hpccube.com:65024/1/main)  → latest → 对应的操作系统 → DTK-version-OS-version-x86_64.tar.gz
+
+[**驱动下载地址**](https://cancon.hpccube.com:65024/6/main) → latest 驱动→ rock-xxx-xxx.aio.run
+
+[**DTK下载地址**](https://cancon.hpccube.com:65024/1/main)  → latest → 对应的操作系统 → DTK-version-OS-version-x86_64.tar.gz
+
+[**工具包地址(DCU直通、Kubernets插件、HyQual压力测试、工具包文档)**](https://cancon.hpccube.com:65024/5/main)
+
+[**DAS生态包下载地址**](https://cancon.hpccube.com:65024/4/main/)
+
+[**光源地址**](https://sourcefind.cn/#/main-page)

@@ -4,11 +4,13 @@
 
 .. _搭建基础环境:
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: 1. 构建DCU基础环境
 
    get_started.md
    centos.md
+   ubuntu.md
+   
 
 .. _基于Docker使用DCU:
 .. toctree::
@@ -17,12 +19,12 @@
 
    docker.md
 
-.. _兼容性:
+.. _基于Anaconda使用DCU:
 .. toctree::
    :maxdepth: 2
-   :caption: 3. 兼容性
+   :caption: 3. Anaconda
 
-   compatibility.md
+   Anaconda.md
 
 .. _从NV的GPU迁移到DCU:
 .. toctree::

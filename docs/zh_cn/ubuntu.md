@@ -1,148 +1,156 @@
-### **1.2 DCU基础环境完整教程-Centos7.6**:
+### **1.3 DCU基础环境完整教程-ubuntu**:
 
-#### 1.2.1 **非root用户安装注意事项:**
-   - 确保非root用户已加入`video`组，以便能够使用DCU。
-     ```shell
-     # 对于有sudo权限的非root用户
-     sudo usermod -aG video $USER
-     
-     # 对于无sudo权限的用户，由root执行
-     usermod -aG video <userid>
-     ```
+#### 1.3.1. **安装系统过程中注意:**
+> Ubuntu20.04.1（5.4.0-42-generic）和Ubuntu22.04.1（5.15.0-25-generic）已在 DCU 上进行全量验证，本文以Ubuntu20.04.1（5.4.0-42-generic）安装部署为例，如果是其他版本或者kernel不一致可能导致驱动无效
+  
+   1. 安装时不要连接网络（直接断掉网线或者在安装系统时将网络disable），否则会自动升级内核(<font color="red">即使选择了不更新操作</font>)。
 
-#### 1.2.2. **操作系统设置**：
+    安装系统时将网络disable；
+  
+   ![disable_net](./imgs/ubuntu/disable_net.png)
 
-确保启动项中不包含nomodeset选项，如果内核以nomodeset选项启动，则驱动可能无法成功加载。
-
-- 需要保证系统纯净，命令行运行 `lsmod | grep amdgpu` 为空
-- 关闭 selinux（可选）
-
-    修改`/etc/selinux/config`，设置`SELINUX=disabled`
-
-- 关闭 firewalld（可选）
-    ```bash
-    systemctl stop firewalld
-    systemctl disable firewalld
-    ```
+   2. 安装过程中, 涉及到更新的选项都选择不更新;
 
 
-#### 1.2.3. **关闭内核自动更新:**
-   - 编辑`/etc/yum.conf`，在`[main]`部分添加：
-     ```
-     exclude=kernel* 
-     exclude=centos-release*
-     ```
+#### 1.3.2. **安装完成系统后的配置**
+   1. 安装完系统后确定内核, 是否符合兼容性, 如果不符合兼容性, 
+        ```shell
+        root@test79:/mnt# uname -r
+        5.4.0-173-generic
+        ```
+       建议确认
+       - 使用的操作系统版本是否在兼容性列表;
+       - 是否在安装操作系统中禁用网络，选择不更新的相关配置; 
 
-#### 1.2.4. **更新yum源:**
+   2. 确保非root用户已加入`video`组，以便能够使用DCU;
 
-   - 替换为中科大源，针对CentOS 7.6的示例, （注意使用双引号）：
+       - 确保非root用户已加入`video`组，以便能够使用DCU, shell 命令修改;
+
+            ```shell
+            # 对于有sudo权限的非root用户
+            sudo usermod -aG video $USER
+            
+            # 对于无sudo权限的用户，由root执行
+            usermod -aG video <userid>
+            ```
+
+       - 或者，或者修改/etc/group文件，添加test用户;
+
+            ![disable_net](./imgs/ubuntu/render.png)
+            
+            退出重新登录。
+
+   3. 关闭内核自动更新: 
+       - 查看安装内核：
+            ```shell
+            dpkg --list | grep linux-image
+            dpkg --list | grep linux-headers
+            dpkg --list | grep linux-modules
+
+
+            # 输出结果:-----------------------------------------------------------------------------------------------------------
+            ii  linux-image-5.4.0-173-generic         5.4.0-173.191                     amd64        Signed kernel image generic
+            hi  linux-image-5.4.0-42-generic          5.4.0-42.46                       amd64        Signed kernel image generic
+            ii  linux-image-generic                   5.4.0.173.171                     amd64        Generic Linux kernel image
+            ```
+
+       - 禁止内核更新方法1:
+            ```shell
+            sudo vi /etc/apt/apt.conf.d/10periodic
+            sudo vi /etc/apt/apt.conf.d/20auto-upgrades
+            # 后面部分全部改成 “0”
+
+
+            # 修改后内容 ----------------------------------------
+            # 10periodic
+            APT::Periodic::Update-Package-Lists "0";
+            APT::Periodic::Download-Upgradeable-Packages "0";
+            APT::Periodic::AutocleanInterval "0";
+            # 20auto-upgrades
+            APT::Periodic::Update-Package-Lists "0";
+            APT::Periodic::Unattended-Upgrade "0";
+            ```
+       - 禁止内核更新方法2:
+
+            直接使用hold参数，固定内核版本：
+            ```shell
+            sudo apt-mark hold linux-image-5.4.0-42-generic
+            sudo apt-mark hold linux-headers-5.4.0-42-generic
+            sudo apt-mark hold linux-modules-extra-5.4.0-42-generic
+            ```
+
+            查询 Ubuntu系统被锁定不更新的软件包状态(hold)
+            ```shell
+            sudo dpkg --get-selections | grep hold
+            ```
+
+#### 1.3.3. **更新国内软件下载源:**
+
+   1. 备份源文件：
 
         ```shell
-        sed -e "s|^mirrorlist=|#mirrorlist=|g" -e "s|^#baseurl=http://mirror.centos.org/centos/\$releasever|baseurl=https://mirrors.ustc.edu.cn/centos-vault/$minorver|g"  -i.bak  /etc/yum.repos.d/CentOS-*.repo
+        sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
         ```
 
-   - 替换  `CentOS-CR.repo` 并且 `enable`（安装python3需要）
+   2. 修改源文件sources.list: 将原文件内容全部注释或删掉，添加以下内容;
 
         ```shell
-        sed -i "s|^baseurl=http://mirror.centos.org/centos/\$releasever|baseurl=https://mirrors.ustc.edu.cn/centos-vault/$minorver|g;s|enabled=0|enabled=1|g"  /etc/yum.repos.d/CentOS-CR.repo
+        # 当前使用阿里源, 如果想使用其他源, 可以自行在网上搜索其他源的配置文件，并替换掉以下内容;
+        # 注意换源的时候需要和操作系统的版本号作匹配
+        deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
+        deb-src http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
+
+        deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
+        deb-src http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
+
+        deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
+        deb-src http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
+
+        deb http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
+        deb-src http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
+
+        deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
+        deb-src http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
         ```
 
-
-   - 对 Centos7 配置 SCLo 源（安装devtoolset需要）:
-
-     编辑 `/etc/yum.repos.d/CentOS-SCLo.repo` 配置文件;
+        如果是ubuntu-22.04可以直接使用如下方式, 更换为华为源;
 
         ```shell
-        vi /etc/yum.repos.d/CentOS-SCLo.repo
+        # 修改为华为源
+        sudo sed -i "s@http://.*archive.ubuntu.com@http://repo.huaweicloud.com@g" /etc/apt/sources.list
+        sudo sed -i "s@http://.*security.ubuntu.com@http://repo.huaweicloud.com@g" /etc/apt/sources.list
         ```
 
-     在 `/etc/yum.repos.d/CentOS-SCLo.repo` 写入以下内容, `Esc + :wq` 保存退出
+
+   3. 更新:
 
         ```shell
-        [centos-sclo-sclo]
-        name=CentOS-7 - SCLo sclo
-        baseurl=https://mirrors.ustc.edu.cn/centos/7/sclo/$basearch/sclo/
-        gpgcheck=0
-        enabled=1
-        gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-SCLo
-        [centos-sclo-rh]
-        name=CentOS-7 - SCLo rh
-        baseurl=https://mirrors.ustc.edu.cn/centos/7/sclo/$basearch/rh/
-        gpgcheck=0
-        enabled=1
-        gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-SCLo
-        ```
-    
-   - 对 Centos7 配置 epel 源（安装cmake3需要）
-
-        编辑 `/etc/yum.repos.d/epel-7.repo` 配置文件;
-
-        ```shell
-        vi /etc/yum.repos.d/epel-7.repo
+        sudo apt-get update 	
         ```
 
-        在/etc/yum.repos.d/epel-7.repo写入以下内容, `Esc + :wq` 保存退出;
-
-        ```shell
-        [epel]
-        name=Extra Packages for Enterprise Linux 7 - $basearch
-        baseurl=http://mirrors.aliyun.com/epel/7/$basearch
-        failovermethod=priority
-        enabled=1
-        gpgcheck=0
-        gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
-
-        [epel-debuginfo]
-        name=Extra Packages for Enterprise Linux 7 - $basearch – Debug
-        baseurl=http://mirrors.aliyun.com/epel/7/$basearch/debug
-        failovermethod=priority
-        enabled=0
-        gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
-        gpgcheck=0
-
-        [epel-source]
-        name=Extra Packages for Enterprise Linux 7 - $basearch – Source
-        baseurl=http://mirrors.aliyun.com/epel/7/SRPMS
-        failovermethod=priority
-        enabled=0
-        gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
-        gpgcheck=0
-        ```
-
-   - 更新cache
-
-        ```shell
-        yum clean all 
-        yum makecache 	
-        ```
-
-#### 1.2.5. **安装相关依赖:**
+#### 1.3.4. **安装相关依赖:**
    - 联网执行以下命令安装必要的依赖包：
 
         ```shell
-        #安装 DCU 加速卡驱动所需的依赖包命令
-        yum install -y gcc gcc-c++ rpm-build autoconf kernel-devel-$(uname -r) kernel-headers-$(uname -r)
-        #安装cmake3
-        yum install -y cmake3 
-        ln -s /usr/bin/cmake3 /usr/bin/cmake
+        # 安装 DCU 加速卡驱动所需的依赖包命令
+        sudo apt-get install -y cmake gcc autoconf linux-kernel-headers kernel-package automake linux-modules-extra-`uname -r` linux-image-`uname -r` linux-headers-`uname -r`
 
-        #安装 DTK 开发环境所需的依赖包命令
-        yum install -y centos-release-scl
-        yum install -y gcc gcc-c++ gcc-gfortran elfutils elfutils-devel make rpm-build devtoolset-7
-        yum install -y libbabeltrace-devel libbabeltrace pciutils-devel libpciaccess-devel
-        yum install -y numactl-devel elfutils-libelf-devel mesa-libGL-devel
-        yum install -y epel-release cmake3 pciutils-libs pciutils-devel
-        yum install -y perl-File-Which perl-File-BaseDir perl-File-Copy-Recursive perl-File-Listing java-1.8.0-openjdk
-        yum install -y git python python-pip python-devel python-wheel python3 python3-pip python3-devel python3-wheel sqlite-devel libibverbs
-        yum install -y redhat-lsb-core gettext gettext-devel protobuf
-        yum install -y perl-Digest perl-Digest-MD5 perl-Data-Dumper vim-common curl libcurl libcurl-devel
-        yum install -y doxygen graphviz texlive texlive-xtab texlive-multirow texlive-sectsty texlive-tocloft
-        yum install -y texlive-adjustbox deltarpm tcl automake
+        # 安装 DTK 开发环境所需的依赖包命令
+        sudo apt-get install -y make gcc g++ cmake git wget gfortran elfutils libdrm-dev 
+        sudo apt-get install -y kmod libtinfo5 sqlite3 libsqlite3-dev libelf-dev libibverbs1 libgtk2.0-0
+        sudo apt-get install -y libnuma-dev libgl1-mesa-dev rpm rsync mesa-common-dev apt-utils
+        sudo apt-get install -y cmake libpci-dev pciutils libpciaccess-dev libbabeltrace-dev pkg-config
+        sudo apt-get install -y libfile-which-perl libfile-basedir-perl libfile-copy-recursive-perl libfile-listing-perl
+        sudo apt-get install -y python3 python3-pip python3-dev python3-wheel
+        sudo apt-get install -y gettext gettext-base libprotobuf-dev tcl
+        sudo apt-get install -y libio-digest-perl libdigest-md5-file-perl libdata-dumper-simple-perl vim curl libcurlpp-dev
+        sudo apt-get install -y doxygen graphviz texlive libncurses5 msgpack*
+        sudo apt install mlocate
         ```
 
    - 离线安装依赖:
     <br>
-        依赖离线包：rpm_DTK2404_centos7.6_3.10.0-957.tar
+        依赖离线包：deb_DTK2404_Ubuntu20.04.1_5.4.0-42-generic.tar
     <br>
         链接：https://pan.baidu.com/s/1jnWfddL4lHWVQb3btD34Iw?pwd=wj6q
     <br>
@@ -150,25 +158,26 @@
     <br>
         下载好导入服务器，进行解压：
     <br>
-        1. `vi /etc/yum.repos.d/localyum.repo`，输入如下内容，请根据解压的路径，修改baseurl的内容，下面配置是在root路径下解压的依赖包;
+        1. `vi /etc/apt/sources.list.d/myrepo.list`，输入如下内容，注意修改解压的路径，下面配置是在/data路径下解压的;
 
             ```shell
-            [local-repo]
-            name=local-repo
-            baseurl=file:///root/centos7-dtk24.04
-            enabled=1
-            gpgcheck=0
+            vi /etc/apt/sources.list.d/myrepo.list
+            #输入如下内容，注意修改解压的路径，下面配置是在/data路径下解压的
+            deb [trusted=yes] file:///data/my-debian-packages ./
+            #保存退出即可
+
+            chmod +r /data
+            chown -R _apt:root /datahR
+            chown -R man:root /var/cache/man
+            #更新系统的apt缓存，使其能够识别并使用新添加的本地私有源
+            apt update
+            apt-get install udev
+            apt install mlocate
             ```
 
-        2. 开始安装离线依赖包
+        更新了之后，就可以通过`apt install`安装依赖包了。
 
-            ```shell
-            sudo yum clean all
-            #以安装cmake3为例
-            yum --disablerepo="*" --enablerepo="local-repo" install cmake3
-            ```
-
-#### 1.2.6. **校验系统配置:**
+#### 1.3.5. **校验系统配置:**
 
 | 设备名称 | 设备码 |
 | -----   | ----- |
@@ -216,7 +225,7 @@ root@sugontest79:/mnt#lspci -nn |grep -i 6210
 
 
 
-#### 1.2.7. **安装驱动:**
+#### 1.3.6. **安装驱动:**
 
 **注意：**
 > DTK和rock驱动有对应关系，可参考[dcu-环境安装手册](#DCU环境安装手册)，推荐安装最新的使用<br>
@@ -269,7 +278,7 @@ root@sugontest79:/mnt#lspci -nn |grep -i 6210
 
 
 
-#### 1.2.8. **安装DTK:**
+#### 1.3.7. **安装DTK:**
    
 **DTK下载地址**:  [https://cancon.hpccube.com:65024/1/main](https://cancon.hpccube.com:65024/1/main)  → latest → 对应的操作系统 → DTK-version-OS-version-x86_64.tar.gz
 
@@ -310,7 +319,7 @@ root@sugontest79:/mnt#lspci -nn |grep -i 6210
     ======================End of SMI Log========================
     ```
 
-#### 1.2.9. **验证安装结果:**
+#### 1.3.8. **验证安装结果:**
 
 1. 使用`rocminfo`命令检查ROCm系统状态
 
