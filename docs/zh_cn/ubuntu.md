@@ -213,17 +213,6 @@ root@sugontest79:/mnt#lspci -nn |grep -i 6210
 
 > 注：输出信息可能和截图不完全一致。
 
-- 配置环境变量
-
-    <br>
-    创建文件 `/etc/profile.d/devtoolset-7.sh`，内容如下：
-    <br>
-    `source /opt/rh/devtoolset-7/enable`
-    <br>
-    退出当前登录会话重新登录，或者执行source /etc/profile.d/devtoolset-7.sh。
-
-
-
 
 #### 1.3.6. **安装驱动:**
 
