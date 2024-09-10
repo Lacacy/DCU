@@ -1,12 +1,12 @@
 # 1 基于Andaconda的DCU使用示例:
 
-## 1.1. 使用DCU在Pytorch推理Resnet50分类
-
-### 1.1.1. 安装Anaconda;
+## 1.1. 安装Anaconda;
 
    [Anaconda地址](https://www.anaconda.com/download)
 
-### 1.1.2. 创建虚拟环境, 设置pip下载源为国内:
+## 1.2. 使用DCU在Pytorch推理Resnet50分类
+
+### 1.2.1. 创建虚拟环境, 设置pip下载源为国内:
 
 
 ```bash
@@ -15,7 +15,7 @@ conda activate dcu_test
 pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
-### 1.1.3. 从开发者社区的下载torch、torchvision;
+### 1.2.2. 从开发者社区的下载torch、torchvision;
 
 [**DAS生态包下载地址**](https://cancon.hpccube.com:65024/4/main/)
 
@@ -26,7 +26,7 @@ pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
     python -c "import torch;print(torch.cuda.is_available());print(torch.cuda.device_count())"
     ```
 
-### 1.1.4. 执行resetnet50分类的推理代码:
+### 1.2.3. 执行resetnet50分类的推理代码:
 
 ```shell
 git clone http://developer.hpccube.com/codes/wangkx1/torch_inference_resnet50.git
@@ -35,7 +35,7 @@ python torch_verify.py
 ```
 
 
-# 2.2 基于Docker使用DCU
+# 2 基于Docker使用DCU
 
 DCU开发者社区光源镜像介绍:
 
@@ -52,22 +52,22 @@ DCU开发者社区光源镜像介绍:
 cat /etc/os-release
 ```
 
-## 2.2.2. 启动容器
+## 2.2. 启动容器
 
 基于镜像创建的容器可提供开箱即用的基于DCU的深度学习运行环境：
 
-## 2.2.3. 前置条件
+### 2.2.1. 前置条件
 1. 安装DCU加速卡，并完成其对应驱动的安装；
 
 2. 正确安装docker；
 
-## 2.2.4. 拉取镜像
+### 2.2.2. 拉取镜像
 
 ```bash
 docker pull image.sourcefind.cn:5000/dcu/admin/base/pytorch:1.0-ubuntu20.04-dtk24.04.1-py3.8
 ```
 
-## 2.2.5. 启动容器命令
+### 2.2.3. 启动容器命令
 
 ```bash
 docker run -it \
@@ -107,7 +107,9 @@ image.sourcefind.cn:5000/dcu/admin/base/pytorch:1.0-ubuntu20.04-dtk24.04.1-py3.8
      /bin/bash  # 容器内启动bash
 ```           
 
-## 2.2.6. 验证`torch`是否安装成功;
+## 2.3. 基于容器执行resetnet50分类的推理代码
+
+### 2.3.1. 验证`torch`是否安装成功;
 
     ```shell
     python -c "import torch;print(torch.cuda.is_available());print(torch.cuda.device_count())"
@@ -118,7 +120,7 @@ image.sourcefind.cn:5000/dcu/admin/base/pytorch:1.0-ubuntu20.04-dtk24.04.1-py3.8
 1. 下载torch、torchvision的whl文件到本地; 
 2. `pip install *.whl`;
 
-## 2.2.7. 执行resetnet50分类的推理代码:
+### 2.3.2. 执行resetnet50分类的推理代码:
 
 ```shell
 git clone http://developer.hpccube.com/codes/wangkx1/torch_inference_resnet50.git
