@@ -1,12 +1,12 @@
-# 2.1 基于Andaconda的DCU使用示例:
+# 1 基于Andaconda的DCU使用示例:
 
-## 2.1.1. 使用DCU在Pytorch推理Resnet50分类
+## 1.1. 使用DCU在Pytorch推理Resnet50分类
 
-### 2.1.1.1. 安装Anaconda;
+### 1.1.1. 安装Anaconda;
 
    [Anaconda地址](https://www.anaconda.com/download)
 
-### 2.1.1.2. 创建虚拟环境, 设置pip下载源为国内:
+### 1.1.2. 创建虚拟环境, 设置pip下载源为国内:
 
 
 ```bash
@@ -15,7 +15,7 @@ conda activate dcu_test
 pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
-### 2.1.1.3. 从开发者社区的下载torch、torchvision;
+### 1.1.3. 从开发者社区的下载torch、torchvision;
 
 [**DAS生态包下载地址**](https://cancon.hpccube.com:65024/4/main/)
 
@@ -26,7 +26,7 @@ pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
     python -c "import torch;print(torch.cuda.is_available());print(torch.cuda.device_count())"
     ```
 
-### 2.1.1.4. 执行resetnet50分类的推理代码:
+### 1.1.4. 执行resetnet50分类的推理代码:
 
 ```shell
 git clone http://developer.hpccube.com/codes/wangkx1/torch_inference_resnet50.git
@@ -43,7 +43,7 @@ DCU开发者社区光源镜像介绍:
 
 光源可以查询到基于多种DTK版本的安装的深度学习基础镜像、大模型推理框架(vllm、lmdeploy、fastllm等)镜像、通用模型推理框架镜像(migraphx、AITemplate等)镜像；
 
-## 2.2.1. 安装Docker
+## 2.1. 安装Docker
 
 参考当前操作系统的版本号，自行安装docker
 
@@ -64,7 +64,7 @@ cat /etc/os-release
 ## 2.2.4. 拉取镜像
 
 ```bash
-docker pull image.sourcefind.cn:5000/dcu/admin/base/pytorch:2.1.0-ubuntu20.04-dtk24.04.1-py3.8
+docker pull image.sourcefind.cn:5000/dcu/admin/base/pytorch:1.0-ubuntu20.04-dtk24.04.1-py3.8
 ```
 
 ## 2.2.5. 启动容器命令
@@ -83,7 +83,7 @@ docker run -it \
 --cap-add=SYS_PTRACE \
 --security-opt seccomp=unconfined \
 --name=dcu_test \
-image.sourcefind.cn:5000/dcu/admin/base/pytorch:2.1.0-ubuntu20.04-dtk24.04.1-py3.8 \
+image.sourcefind.cn:5000/dcu/admin/base/pytorch:1.0-ubuntu20.04-dtk24.04.1-py3.8 \
 /bin/bash
 
 
