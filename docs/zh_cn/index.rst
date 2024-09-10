@@ -3,9 +3,10 @@
 
 
 资源下载:
+-------------
 
 
-* `驱动下载 <https://arxiv.org/abs/2210.17323>`_ → latest 驱动 → rock-xxx-xxx.aio.run
+* `驱动下载 <https://cancon.hpccube.com:65024/6/main>`_ → latest 驱动 → rock-xxx-xxx.aio.run
 * `DTK下载 <https://cancon.hpccube.com:65024/1/main>`_ → latest → 对应的操作系统 → DTK-version-OS-version-x86_64.tar.gz
 * `工具包地址(DCU直通、Kubernets插件、HyQual压力测试、工具包文档) <https://cancon.hpccube.com:65024/5/main>`_
 * `DAS生态包下载 <https://cancon.hpccube.com:65024/4/main/>`_
@@ -33,7 +34,7 @@
    :maxdepth: 1
    :caption: 构建DCU基础环境
 
-   base_install_intro.md
+   ./install_dcu_on_os/base_install_intro.md
    ./install_dcu_on_os/centos.md
    ./install_dcu_on_os/ubuntu.md
    
