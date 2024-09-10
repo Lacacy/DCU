@@ -1,7 +1,7 @@
 欢迎来到 DCU 的环境安装教程！
 ====================================
 
-.. _搭建基础环境:
+.. _基础介绍:
 .. toctree::
    :maxdepth: 2
    :caption: 基础介绍
@@ -11,7 +11,7 @@
 
 .. _下载地址汇总:
 .. toctree::
-   :maxdepth: 
+   :maxdepth: 1
    :caption: 资源下载地址
 
    [**驱动下载地址**](https://cancon.hpccube.com:65024/6/main) → latest 驱动 → rock-xxx-xxx.aio.run
