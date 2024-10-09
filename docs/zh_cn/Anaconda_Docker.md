@@ -1,4 +1,4 @@
-# 1 基于Andaconda的DCU使用示例:
+# 1 基于Anaconda的DCU使用示例:
 
 ## 1.1. 安装Anaconda;
 
